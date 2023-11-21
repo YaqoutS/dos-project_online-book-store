@@ -5,28 +5,28 @@ services:
     image: catalog-server
     ports:
       - "4568:4568"
-    # networks:
-    #   - online-book-store
+    networks:
+      - online-book-store
 
   order-server:
     image: order-server
     ports:
       - "4567:4567"
-    # networks:
-    #   - online-book-store
+    networks:
+      - online-book-store
     depends_on:
       - catalog-server
 
   frontend:
     image: frontend
-    # networks:
-    #   - online-book-store
+    networks:
+      - online-book-store
     stdin_open: true # Keeps the STDIN open to allow interaction with the console
     tty: true # Allocates a pseudo-TTY to keep the container running
     depends_on:
       - catalog-server
       - order-server
 
-# networks:
-#   online-book-store:
-#     driver: bridge
+networks:
+  online-book-store:
+    driver: bridge
