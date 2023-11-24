@@ -105,7 +105,7 @@ public class Main {
 					    
 			try {
 	            // URL of the info API we want to call
-	            String apiUrl = "http://localhost:4568/info/" + requestId;
+	            String apiUrl = "http://catalog-server:4568/info/" + requestId;
 
 	            // open a connection to the info API
 	            URL url = new URL(apiUrl);
@@ -141,7 +141,7 @@ public class Main {
 	            }
 	            
 	            // URL of the dec API that will be called to decrement the quantity
-	            apiUrl = "http://localhost:4568/dec/" + book.getId();
+	            apiUrl = "http://catalog-server:4568/dec/" + book.getId();
 	            url = new URL(apiUrl);
 	            connection = (HttpURLConnection) url.openConnection();
 	            connection.setRequestMethod("PUT");
