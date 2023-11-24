@@ -7,6 +7,8 @@ services:
       - "4568:4568"
     networks:
       - online-book-store
+    volumes:
+      - ./catalog-server/catalog.db:/app/catalog.db
 
   order-server:
     image: order-server
@@ -16,6 +18,8 @@ services:
       - online-book-store
     depends_on:
       - catalog-server
+    volumes:
+      - ./order-server/orderserver.db:/app/orderserver.db
 
   frontend:
     image: frontend
