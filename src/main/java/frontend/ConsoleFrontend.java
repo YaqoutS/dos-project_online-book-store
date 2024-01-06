@@ -54,7 +54,7 @@ public class ConsoleFrontend {
 
         while (!isValidId) {
             try {
-                System.out.println("Enter the book id (1 to 4):");
+                System.out.println("Enter the book id (1 to 7):");
                 id = scanner.nextInt();
                 isValidId = true;
             } catch (InputMismatchException e) {
@@ -212,7 +212,13 @@ public class ConsoleFrontend {
             switch (serviceChoice) {
                 case 1:
                     // search
+                	
+                	long startTime = System.currentTimeMillis();
                     String searchTopic = getSearchTopic(scanner);
+                    long endTime = System.currentTimeMillis();
+                    long elapsedTime = endTime - startTime;
+                    System.out.println("Response time: " + elapsedTime + " milliseconds");
+                    
                     System.out.println("Performing search for topic: " + searchTopic);
                     
                     // calling the search API
@@ -235,7 +241,12 @@ public class ConsoleFrontend {
                     System.out.println("Displaying info for book with id: " + bookID);
                     
                     // calling the info API
+                    
+                    startTime = System.currentTimeMillis();
                     int infoStatusCode = infoAPICall(bookID, book);
+                    endTime = System.currentTimeMillis();
+                    elapsedTime = endTime - startTime;
+                    System.out.println("Response time: " + elapsedTime + " milliseconds");
                     
                     if(infoStatusCode == 404) {
                     	System.out.println("There is no book with ID = " + bookID);
@@ -252,7 +263,12 @@ public class ConsoleFrontend {
                     System.out.println("Processing purchase for book with id: " + bookIdPurchase);
                     
                     // calling the purchase API
+                    startTime = System.currentTimeMillis();
                     String resutl = purchaseAPICall(bookIdPurchase);
+                    endTime = System.currentTimeMillis();
+                    elapsedTime = endTime - startTime;                  
+                    System.out.println("Response time: " + elapsedTime + " milliseconds");
+                    
                     System.out.println(resutl);
                     
                     break;
