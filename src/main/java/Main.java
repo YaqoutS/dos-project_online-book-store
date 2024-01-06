@@ -50,6 +50,13 @@ public class Main {
 //			SQLquery = "insert into book values('4', 'undergraduate school', 'Cooking for the Impatient Undergrad', '30', '10');";
 //			stmt.executeUpdate(SQLquery);
 
+//			String SQLquery = "insert into book values('5', 'new topic', 'How to finish Project 3 on time', '30', '10');";
+//			stmt.executeUpdate(SQLquery);
+//			SQLquery = "insert into book values ('6', 'new topic', 'Why theory classes are so hard', '30', '10');";
+//			stmt.executeUpdate(SQLquery);
+//			SQLquery = "insert into book values ('7', 'new topic', 'Spring in the Pioneer Valley', '30', '10');";
+//			stmt.executeUpdate(SQLquery);
+		
 			// close the connection with the DB
 			conn.close();
 			
