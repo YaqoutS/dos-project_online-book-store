@@ -25,6 +25,13 @@ public class ConsoleFrontend {
 	private static Gson gson = new Gson();
 	private static Cache<String, Object> cache = Caffeine.newBuilder().maximumSize(1000).build();
 
+	// To decide whether the upcoming request should be directed to the primary or secondary catalog server...
+	private static boolean usePrimaryCatalogServer = false;
+	
+	// To decide whether the upcoming request should be directed to the primary or secondary order server...
+	private static boolean usePrimaryOrderServer = false;    
+	
+
 	private static int getServiceChoice(Scanner scanner) {
 		int choice = 0;
 		boolean isValidChoice = false;
@@ -95,7 +102,12 @@ public class ConsoleFrontend {
 		
 		try {
 			String encodedTopic = URLEncoder.encode(topic, StandardCharsets.UTF_8.toString());
-			String apiUrl = "http://localhost:4569/search/" + encodedTopic;
+			String apiUrl = "http://localhost:4568/search/" + encodedTopic;
+			if (!usePrimaryCatalogServer) {
+				// forward request to the secondary catalog server
+				apiUrl = "http://localhost:4569/search/" + encodedTopic;
+			}
+			usePrimaryCatalogServer = !usePrimaryCatalogServer;
 
 			String apiResponse = "";
 
@@ -161,7 +173,12 @@ public class ConsoleFrontend {
 		
 		try {
 			// URL of the info API we want to call
-			String apiUrl = "http://localhost:4569/info/" + bookID;
+			String apiUrl = "http://localhost:4568/info/" + bookID;
+			if (!usePrimaryCatalogServer) {
+				// forward request to the secondary catalog server
+				apiUrl = "http://localhost:4569/info/" + bookID;
+			}
+			usePrimaryCatalogServer = !usePrimaryCatalogServer;
 
 			// open a connection to the info API
 			URL url = new URL(apiUrl);
@@ -209,7 +226,12 @@ public class ConsoleFrontend {
 
 		StringBuilder response = new StringBuilder();
 		try {
-			String apiUrl = "http://localhost:4566/purchase/" + bookID;
+			String apiUrl = "http://localhost:4567/purchase/" + bookID;
+			if (!usePrimaryOrderServer) {
+				// forward request to the secondary order server
+				apiUrl = "http://localhost:4566/purchase/" + bookID;
+			}
+			usePrimaryOrderServer = !usePrimaryOrderServer;
 
 			// open a connection to the info API
 			URL url = new URL(apiUrl);
