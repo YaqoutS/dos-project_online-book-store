@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>DOS Online Book Store - FrontEnd</name>
+  <name>DOS Online Book Store - Frontend</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -42,10 +42,17 @@
       <version>3.42.0.0</version>
     </dependency>
 
+	<dependency>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
+      <version>3.0.4</version> <!-- Use the latest version available -->
+	</dependency>
+	
+	
   </dependencies>
 
   <build>
-    <finalName>frontEnd</finalName>
+    <finalName>frontend</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -84,7 +91,7 @@
                 <configuration>
                   <transformers>
                     <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                      <mainClass>ConsoleFrontEnd</mainClass>
+                      <mainClass>frontend.ConsoleFrontend</mainClass>
                     </transformer>
                   </transformers>
                 </configuration>
