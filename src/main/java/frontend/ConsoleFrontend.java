@@ -95,7 +95,7 @@ public class ConsoleFrontend {
 		
 		try {
 			String encodedTopic = URLEncoder.encode(topic, StandardCharsets.UTF_8.toString());
-			String apiUrl = "http://localhost:4568/search/" + encodedTopic;
+			String apiUrl = "http://localhost:4569/search/" + encodedTopic;
 
 			String apiResponse = "";
 
@@ -124,6 +124,7 @@ public class ConsoleFrontend {
 					TypeToken<List<BookDTO>> typeToken = new TypeToken<List<BookDTO>>() {
 					};
 					books = gson.fromJson(apiResponse, typeToken.getType());
+					cachePut(topic, books);
 				} else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
 					System.out.println("No results found for the search topic: " + topic);
 				} else {
@@ -135,7 +136,6 @@ public class ConsoleFrontend {
 				System.out.println("Error calling the API");
 			}
 
-			cachePut(topic, books);
 			return books;
 
 		} catch (UnsupportedEncodingException e) {
@@ -161,7 +161,7 @@ public class ConsoleFrontend {
 		
 		try {
 			// URL of the info API we want to call
-			String apiUrl = "http://localhost:4568/info/" + bookID;
+			String apiUrl = "http://localhost:4569/info/" + bookID;
 
 			// open a connection to the info API
 			URL url = new URL(apiUrl);
@@ -209,7 +209,7 @@ public class ConsoleFrontend {
 
 		StringBuilder response = new StringBuilder();
 		try {
-			String apiUrl = "http://localhost:4567/purchase/" + bookID;
+			String apiUrl = "http://localhost:4566/purchase/" + bookID;
 
 			// open a connection to the info API
 			URL url = new URL(apiUrl);
